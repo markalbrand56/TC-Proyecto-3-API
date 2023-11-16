@@ -43,4 +43,4 @@ async def turning_machine(cadena: str):
 
     simulationResult, isAccepted = turing_machine.simulate(cadena)
 
-    return {"Resultado: ": simulationResult, "esAceptado": isAccepted}
+    return {"resultado": simulationResult, "aceptado": isAccepted}
