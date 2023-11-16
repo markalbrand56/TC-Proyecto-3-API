@@ -41,6 +41,6 @@ async def turning_machine(cadena: str):
     # Create an instance of the Turing Machine
     turing_machine = TuringMachine(**config)
 
-    simulationResult, isAccepted = turing_machine.simulate(cadena)
+    simulation_result, is_accepted = turing_machine.simulate(cadena)
 
-    return {"resultado": simulationResult, "aceptado": isAccepted}
+    return {"resultado": simulation_result, "aceptado": is_accepted}
