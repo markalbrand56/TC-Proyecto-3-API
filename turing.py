@@ -49,8 +49,9 @@ if __name__ == "__main__":
 
     # Test the Turing Machine simulation with an example input string
     input_string = "1001"
-    simulation_result = turing_machine.simulate(input_string)
+    simulation_result, was_accepted = turing_machine.simulate(input_string)
 
+    print(was_accepted)
     for step in simulation_result:
         print(step)
 
