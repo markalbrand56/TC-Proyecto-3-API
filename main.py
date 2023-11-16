@@ -1,3 +1,5 @@
+# pip install fastapi
+# pip install uvicorn
 from fastapi import FastAPI
 
 app = FastAPI()
