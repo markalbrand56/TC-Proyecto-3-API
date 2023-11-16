@@ -1,7 +1,11 @@
 {
-  "símbolos": ["0", "1"],
-  "estados": ["s1", "s2", "s3", "sh"],
-  "movimientos": {
+  "symbols": ["0", "1"],
+  "states": ["s1", "s2", "s3", "sh"],
+  "initial_state": "s1",
+  "final_states": ["sh"],
+  "blank_symbol": "B",
+  "tape": ["0", "1", "B"],
+  "transitions": {
     "s1": {
         "0": ["s1", "0", "R"],
         "1": ["s1", "1", "R"],
