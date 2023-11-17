@@ -1,31 +1,23 @@
 import json
-from json import JSONDecodeError
 
 
-# build a function that return a json file given the route.
-# This function will be called by the main.py file
-def get_json(route):
-    with open(route) as config_file:
-        config = json.load(config_file)
-    return config
-
-
-class TuringMachine():
-
+class TuringMachine:
     def __init__(self, symbols, states, initial_state, final_states, blank_symbol, transitions, tape=None):
-        self.symbols = symbols
-        self.states = states
-        self.initial_state = initial_state
-        self.final_states = final_states
-        self.blank_symbol = blank_symbol
-        self.transitions = transitions
-        self.tape = tape
+        self.symbols = symbols  # Alfabeto
+        self.states = states  # Estados
+        self.initial_state = initial_state  # Estado inicial
+        self.final_states = final_states  # Estados finales
+        self.blank_symbol = blank_symbol  # Símbolo blanco
+        self.transitions = transitions  # Transiciones
+        self.tape = tape  # Cinta
 
     def reset_tape(self, input_string):
+        """Reinicia la cinta con la cadena de entrada y el símbolo en blanco"""
         self.tape = list(input_string)
         self.tape.append(self.blank_symbol)
 
     def simulate(self, input_string):
+        """Simula la máquina de Turing con la cadena de entrada dada"""
         self.reset_tape(input_string)
         current_state = self.initial_state
         tape_position = 0
@@ -50,18 +42,15 @@ class TuringMachine():
 
 
 if __name__ == "__main__":
-    # Define the Turing Machine configuration based on the provided JSON
+    # TEST
     with open("turing.json") as config_file:
         config = json.load(config_file)
 
-    # Create an instance of the Turing Machine
-    turing_machine = TuringMachine(**config)
+    turing_machine = TuringMachine(**config)  # Leer el archivo json y crear una instancia de la máquina de Turing
 
-    # Test the Turing Machine simulation with an example input string
     input_string = "100000100"
     simulation_result, was_accepted = turing_machine.simulate(input_string)
 
     print(was_accepted)
     for step in simulation_result:
         print(step)
-

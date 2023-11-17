@@ -27,6 +27,11 @@ async def root():
 
 @app.get("/turingMachine/{cadena}")
 async def turning_machine(cadena: str):
+    """
+    Simula la máquina de Turing con la cadena de entrada dada en el parámetro
+    :param cadena: Cadena de entrada
+    :return: El resultado de la simulación de la máquina de Turing
+    """
     # Define the Turing Machine configuration based on the provided JSON
     with open("turing.json") as config_file:
         config = json.load(config_file)
@@ -41,6 +46,10 @@ async def turning_machine(cadena: str):
 
 @app.get("/json")
 async def get_json():
+    """
+    Obtiene la configuración de la máquina de Turing desde el archivo json
+    :return: La configuración de la máquina de Turing, en formato json
+    """
     with open("turing.json") as config_file:
         config = json.load(config_file)
 
