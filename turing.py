@@ -49,7 +49,6 @@ class TuringMachine():
         return derivation_process, is_accepted
 
 
-
 if __name__ == "__main__":
     # Define the Turing Machine configuration based on the provided JSON
     with open("turing.json") as config_file:
@@ -59,7 +58,7 @@ if __name__ == "__main__":
     turing_machine = TuringMachine(**config)
 
     # Test the Turing Machine simulation with an example input string
-    input_string = "1001"
+    input_string = "100000100"
     simulation_result, was_accepted = turing_machine.simulate(input_string)
 
     print(was_accepted)
