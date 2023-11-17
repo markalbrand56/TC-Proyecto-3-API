@@ -44,8 +44,22 @@ async def turning_machine(cadena: str):
 
     return {"resultado": simulation_result, "aceptado": is_accepted}
 
-# I want to return turing.json as json.
+
 @app.get("/json")
 async def get_json():
-    return readable("turing.json")
+    with open("turing.json") as config_file:
+        config = json.load(config_file)
+
+    # Create an instance of the Turing Machine
+    turing_machine = TuringMachine(**config)
+
+    return {
+        "symbols": turing_machine.symbols,
+        "states": turing_machine.states,
+        "initial_state": turing_machine.initial_state,
+        "final_states": turing_machine.final_states,
+        "blank_symbol": turing_machine.blank_symbol,
+        "tape": turing_machine.tape,
+        "transitions": turing_machine.transitions,
+    }
 
