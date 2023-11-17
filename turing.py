@@ -35,6 +35,9 @@ class TuringMachine:
         current_state = self.initial_state
         tape_position = 0
         derivation_process = []
+        
+        first_step = f"State: {current_state}, Tape: {input_string}, Head Position: {tape_position}"
+        derivation_process.append(first_step)
 
         while current_state not in self.final_states and tape_position < len(self.tape):
             current_symbol = self.tape[tape_position]
@@ -65,7 +68,7 @@ if __name__ == "__main__":
 
     turing_machine = TuringMachine(**config)  # Leer el archivo json y crear una instancia de la máquina de Turing
 
-    input_string = "100000100"
+    input_string = "10000100"
     simulation_result, was_accepted = turing_machine.simulate(input_string)
 
     print(was_accepted)
