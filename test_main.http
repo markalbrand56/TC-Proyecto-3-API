@@ -3,19 +3,11 @@
 GET http://127.0.0.1:8000/
 Accept: application/json
 
-###
-
-GET http://127.0.0.1:8000/hello/User
-Accept: application/json
-
-###
-
+### Número impar de ceros
 GET http://127.0.0.1:8000/turingMachine/10001
 
-###
-
+### Número par de ceros
 GET http://127.0.0.1:8000/turingMachine/1001010
 
-###
-
+### Configuración de la máquina de Turing
 GET  http://127.0.0.1:8000/json
