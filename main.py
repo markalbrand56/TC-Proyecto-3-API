@@ -3,10 +3,8 @@
 from fastapi import FastAPI
 import json
 from fastapi.middleware.cors import CORSMiddleware
-
 from turing import TuringMachine
-
-from formatJsontoText import format_turing_machine_from_json
+from turing import readable
 
 app = FastAPI()
 
@@ -49,6 +47,5 @@ async def turning_machine(cadena: str):
 # I want to return turing.json as json.
 @app.get("/json")
 async def get_json():
-    ans = format_turing_machine_from_json("turing.json")
-    return {"json": ans}
+    return readable("turing.json")
 
