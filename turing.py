@@ -11,13 +11,18 @@ class TuringMachine:
         self.transitions = transitions  # Transiciones
         self.tape = tape  # Cinta
 
-    def reset_tape(self, input_string):
+    def reset_tape(self, input_string: str) -> None:
         """Reinicia la cinta con la cadena de entrada y el símbolo en blanco"""
         self.tape = list(input_string)
         self.tape.append(self.blank_symbol)
 
-    def simulate(self, input_string):
-        """Simula la máquina de Turing con la cadena de entrada dada"""
+    def simulate(self, input_string: str) -> tuple[list[str], bool]:
+        """
+        Simula la máquina de Turing con la cadena de entrada dada.
+        Los movimientos son: R (derecha), L (izquierda). Los demás serán ignorados.
+        :param input_string: Cadena de entrada
+        :return: Una tupla con la lista de pasos de la simulación y un booleano que indica si la cadena fue aceptada
+        """
         self.reset_tape(input_string)
         current_state = self.initial_state
         tape_position = 0
@@ -30,7 +35,11 @@ class TuringMachine:
             # Update the tape, state, and tape position
             self.tape[tape_position] = action[1]
             current_state = action[0]
-            tape_position += 1 if action[2] == "R" else -1
+            # tape_position += 1 if action[2] == "R" else -1
+            if action[2] == "R":
+                tape_position += 1
+            elif action[2] == "L":
+                tape_position -= 1
 
             # Record the step in the derivation process
             tape_view = ''.join(self.tape)
