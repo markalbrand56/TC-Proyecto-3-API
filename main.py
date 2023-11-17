@@ -4,7 +4,6 @@ from fastapi import FastAPI
 import json
 from fastapi.middleware.cors import CORSMiddleware
 from turing import TuringMachine
-from turing import readable
 
 app = FastAPI()
 

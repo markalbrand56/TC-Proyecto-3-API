@@ -11,6 +11,7 @@ def get_json(route):
 
 
 class TuringMachine():
+
     def __init__(self, symbols, states, initial_state, final_states, blank_symbol, transitions, tape=None):
         self.symbols = symbols
         self.states = states
@@ -30,7 +31,7 @@ class TuringMachine():
         tape_position = 0
         derivation_process = []
 
-        while current_state not in self.final_states:
+        while current_state not in self.final_states and tape_position < len(self.tape):
             current_symbol = self.tape[tape_position]
             action = self.transitions[current_state][current_symbol]
 
@@ -47,75 +48,6 @@ class TuringMachine():
         is_accepted = current_state in self.final_states
         return derivation_process, is_accepted
 
-def readableOG(path):
-    try:
-        with open(path, 'r') as file:
-            data = json.load(file)
-
-    except(IOError, JSONDecodeError) as error:
-        return f"Error al leer el archivo {error}"
-
-    '''
-    //-------CONFIGURATION
-    name: [name_of_machine]
-    init: [initial_state]
-    accept: [accept_state_1],... ,[accept_state_n]
-    '''
-
-    # format the json file
-    t = '//-------CONFIGURATION' + '\n'
-    t = f"name: Turing_Machine" + '\n'
-    t += f"init: [{data['initial_state']}]" + '\n'
-    # final states may me a list of states
-    m = ""
-    for i in data['final_states']:
-        m += f"{i}"
-    t += f"accept:" f"[{m}]"
-    t += '\n'
-
-    '''
-    /-------DELTA FUNCTION:
-    [current_state],[read_symbol]
-    [new_state],[write_symbol],[>|<|-]
-    
-    // < = left
-    // > = right
-    // - = hold
-    // use underscore for blank cells
-    '''
-
-    t += '//-------DELTA FUNCTION:' + '\n'
-    # current state, read symbol, new state, write symbol, are variables that should be found in the json file
-    # current state
-
-
-    return t
-
-
-def readable(path):
-    try:
-        with open(path, 'r') as file:
-            data = json.load(file)
-    except Exception as error:
-        return f"Error al leer el archivo: {error}"
-
-    # Formato de la configuración
-    t = '//-------CONFIGURATION\n'
-    t += f"name: Turing_Machine\n"
-    t += f"init: [{data['initial_state']}]\n"
-    # Estados finales
-    final_states = ','.join(data['final_states'])
-    t += f"accept: [{final_states}]\n\n"
-
-    # Formato de la función DELTA
-    t += '//-------DELTA FUNCTION:\n'
-    for state, transitions in data['transitions'].items():
-        for read_symbol, transition in transitions.items():
-            new_state, write_symbol, direction = transition
-            direction_symbol = {'R': '>', 'L': '<', '-': '-'}[direction]
-            t += f"{state},{read_symbol}\n"
-            t += f"{new_state},{write_symbol},{direction_symbol}\n"
-    return t
 
 
 if __name__ == "__main__":
@@ -133,8 +65,4 @@ if __name__ == "__main__":
     print(was_accepted)
     for step in simulation_result:
         print(step)
-
-    print("/******************************************/")
-    ans = readable("turing.json")
-    print(ans)
 
