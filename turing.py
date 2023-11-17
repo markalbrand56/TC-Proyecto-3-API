@@ -2,6 +2,14 @@ import json
 
 
 class TuringMachine:
+    symbols: list[str]
+    states: list[str]
+    initial_state: str
+    final_states: list[str]
+    blank_symbol: str
+    transitions: dict[str, dict[str, tuple[str, str, str]]]
+    tape: list[str]
+
     def __init__(self, symbols, states, initial_state, final_states, blank_symbol, transitions, tape=None):
         self.symbols = symbols  # Alfabeto
         self.states = states  # Estados

@@ -53,14 +53,19 @@ async def get_json():
 
     turing_machine = TuringMachine(**config)  # Crear una instancia de la máquina de Turing
 
+    states_string = ", ".join(turing_machine.states)  # Convertir la lista de estados a una cadena separada por comas
+    symbols_string = ", ".join(turing_machine.symbols)
+    final_states_string = ", ".join(turing_machine.final_states)
+    transitions_string = ", ".join(
+        [f"{state}: {transition}" for state, transition in turing_machine.transitions.items()])
+
     # Regresar la configuración de la máquina de Turing
     return {
-        "symbols": turing_machine.symbols,
-        "states": turing_machine.states,
+        "symbols": symbols_string,
+        "states": states_string,
         "initial_state": turing_machine.initial_state,
-        "final_states": turing_machine.final_states,
+        "final_states": final_states_string,
         "blank_symbol": turing_machine.blank_symbol,
-        "tape": turing_machine.tape,
-        "transitions": turing_machine.transitions,
+        "transitions": transitions_string,
     }
 
