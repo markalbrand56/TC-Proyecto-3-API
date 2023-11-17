@@ -32,14 +32,12 @@ async def turning_machine(cadena: str):
     :param cadena: Cadena de entrada
     :return: El resultado de la simulación de la máquina de Turing
     """
-    # Define the Turing Machine configuration based on the provided JSON
-    with open("turing.json") as config_file:
+    with open("turing.json") as config_file:  # Leer el archivo json
         config = json.load(config_file)
 
-    # Create an instance of the Turing Machine
-    turing_machine = TuringMachine(**config)
+    turing_machine = TuringMachine(**config)  # Crear una instancia de la máquina de Turing
 
-    simulation_result, is_accepted = turing_machine.simulate(cadena)
+    simulation_result, is_accepted = turing_machine.simulate(cadena)  # Simular la máquina de Turing
 
     return {"resultado": simulation_result, "aceptado": is_accepted}
 
@@ -50,12 +48,12 @@ async def get_json():
     Obtiene la configuración de la máquina de Turing desde el archivo json
     :return: La configuración de la máquina de Turing, en formato json
     """
-    with open("turing.json") as config_file:
+    with open("turing.json") as config_file:  # Leer el archivo json
         config = json.load(config_file)
 
-    # Create an instance of the Turing Machine
-    turing_machine = TuringMachine(**config)
+    turing_machine = TuringMachine(**config)  # Crear una instancia de la máquina de Turing
 
+    # Regresar la configuración de la máquina de Turing
     return {
         "symbols": turing_machine.symbols,
         "states": turing_machine.states,
