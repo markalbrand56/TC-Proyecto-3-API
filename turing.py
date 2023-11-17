@@ -31,10 +31,10 @@ class TuringMachine:
         :param input_string: Cadena de entrada
         :return: Una tupla con la lista de pasos de la simulación y un booleano que indica si la cadena fue aceptada
         """
-        self.reset_tape(input_string)
-        current_state = self.initial_state
-        tape_position = 0
-        derivation_process = []
+        self.reset_tape(input_string)  # Reiniciar la cinta con la cadena de entrada y el símbolo en blanco
+        current_state = self.initial_state  # Estado actual
+        tape_position = 0  # Posición de la cinta
+        derivation_process = []  # Lista de pasos de la simulación
         
         first_step = f"State: {current_state}, Tape: {input_string}, Head Position: {tape_position}"
         derivation_process.append(first_step)
@@ -43,21 +43,22 @@ class TuringMachine:
             current_symbol = self.tape[tape_position]
             action = self.transitions[current_state][current_symbol]
 
-            # Update the tape, state, and tape position
+            # Actualizar el símbolo en la cinta y el estado actual
             self.tape[tape_position] = action[1]
             current_state = action[0]
-            # tape_position += 1 if action[2] == "R" else -1
+
+            # Actualizar la posición de la cinta
             if action[2] == "R":
                 tape_position += 1
             elif action[2] == "L":
                 tape_position -= 1
 
-            # Record the step in the derivation process
+            # Agregar el paso actual a la lista de pasos de la simulación
             tape_view = ''.join(self.tape)
             step_info = f"State: {current_state}, Tape: {tape_view}, Head Position: {tape_position}"
             derivation_process.append(step_info)
 
-        is_accepted = current_state in self.final_states
+        is_accepted = current_state in self.final_states  # La cadena es aceptada si el estado actual es final
         return derivation_process, is_accepted
 
 
