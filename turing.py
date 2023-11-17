@@ -36,7 +36,7 @@ class TuringMachine:
         tape_position = 0  # Posición de la cinta
         derivation_process = []  # Lista de pasos de la simulación
         
-        first_step = f"State: {current_state}, Tape: {''.join(turing_machine.tape)}, Head Position: {tape_position}"
+        first_step = f"State: {current_state}, Tape: {''.join(self.tape)}, Head Position: {tape_position}"
         derivation_process.append(first_step)
 
         while current_state not in self.final_states and tape_position < len(self.tape):
