@@ -2,10 +2,11 @@
 # pip install uvicorn
 from fastapi import FastAPI
 import json
-from turing import TuringMachine
 from fastapi.middleware.cors import CORSMiddleware
 
 from turing import TuringMachine
+
+from formatJsontoText import format_turing_machine_from_json
 
 app = FastAPI()
 
@@ -44,3 +45,10 @@ async def turning_machine(cadena: str):
     simulation_result, is_accepted = turing_machine.simulate(cadena)
 
     return {"resultado": simulation_result, "aceptado": is_accepted}
+
+# I want to return turing.json as json.
+@app.get("/json")
+async def get_json():
+    ans = format_turing_machine_from_json("turing.json")
+    return {"json": ans}
+

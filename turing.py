@@ -1,5 +1,12 @@
 import json
 
+# build a function that return a json file given the route.
+# This function will be called by the main.py file
+def get_json(route):
+    with open(route) as config_file:
+        config = json.load(config_file)
+    return config
+
 
 class TuringMachine():
     def __init__(self, symbols, states, initial_state, final_states, blank_symbol, transitions, tape=None):
