@@ -40,6 +40,7 @@ class TuringMachine:
         derivation_process.append(first_step)
 
         while current_state not in self.final_states and tape_position < len(self.tape):
+            # Obtención del símbolo actual y la acción a realizar
             current_symbol = self.tape[tape_position]
             action = self.transitions[current_state][current_symbol]
 
@@ -48,7 +49,7 @@ class TuringMachine:
             current_state = action[0]
 
             # Actualizar la posición de la cinta
-            if action[2] == "R":
+            if action[2] == "R": ## Si la acción es R, la cinta se mueve a la derecha
                 tape_position += 1
             elif action[2] == "L":
                 tape_position -= 1
